@@ -115,12 +115,102 @@ func (style Style) handle() C.IggGuiStyle {
 	return C.IggGuiStyle(style)
 }
 
+// WindowPadding is the padding within a window.
+func (style Style) WindowPadding() Vec2 {
+	var value Vec2
+	valueArg, valueFin := value.wrapped()
+	C.iggStyleGetWindowPadding(style.handle(), valueArg)
+	valueFin()
+	return value
+}
+
+// WindowMinSize is the minimum window size. This is a global setting.
+func (style Style) WindowMinSize() Vec2 {
+	var value Vec2
+	valueArg, valueFin := value.wrapped()
+	C.iggStyleGetWindowMinSize(style.handle(), valueArg)
+	valueFin()
+	return value
+}
+
+// WindowTitleAlign is the alignment for title bar text.
+// Defaults to (0.0f,0.5f) for left-aligned,vertically centered.
+func (style Style) WindowTitleAlign() Vec2 {
+	var value Vec2
+	valueArg, valueFin := value.wrapped()
+	C.iggStyleGetWindowTitleAlign(style.handle(), valueArg)
+	valueFin()
+	return value
+}
+
+// FramePadding is the padding within a framed rectangle (used by most widgets).
+func (style Style) FramePadding() Vec2 {
+	var value Vec2
+	valueArg, valueFin := value.wrapped()
+	C.iggStyleGetFramePadding(style.handle(), valueArg)
+	valueFin()
+	return value
+}
+
+// ItemSpacing is the horizontal and vertical spacing between widgets/lines.
+func (style Style) ItemSpacing() Vec2 {
+	var value Vec2
+	valueArg, valueFin := value.wrapped()
+	C.iggStyleGetItemSpacing(style.handle(), valueArg)
+	valueFin()
+	return value
+}
+
 // ItemInnerSpacing is the horizontal and vertical spacing between elements of
 // a composed widget (e.g. a slider and its label).
 func (style Style) ItemInnerSpacing() Vec2 {
 	var value Vec2
 	valueArg, valueFin := value.wrapped()
 	C.iggStyleGetItemInnerSpacing(style.handle(), valueArg)
+	valueFin()
+	return value
+}
+
+// TouchExtraPadding allows you to expand reactive bounding box for touch-based
+// system where touch position is not accurate enough.
+// Unfortunately we don't sort widgets so priority on overlap will always be
+// given to the first widget. So don't grow this too much!
+func (style Style) TouchExtraPadding() Vec2 {
+	var value Vec2
+	valueArg, valueFin := value.wrapped()
+	C.iggStyleGetTouchExtraPadding(style.handle(), valueArg)
+	valueFin()
+	return value
+}
+
+// ButtonTextAlign is the alignment of button text when button is larger than
+// text. Defaults to (0.5f,0.5f) for horizontally+vertically centered.
+func (style Style) ButtonTextAlign() Vec2 {
+	var value Vec2
+	valueArg, valueFin := value.wrapped()
+	C.iggStyleGetButtonTextAlign(style.handle(), valueArg)
+	valueFin()
+	return value
+}
+
+// DisplayWindowPadding - Window position are clamped to be visible within the
+// display area by at least this amount. Only applies to regular windows.
+func (style Style) DisplayWindowPadding() Vec2 {
+	var value Vec2
+	valueArg, valueFin := value.wrapped()
+	C.iggStyleGetDisplayWindowPadding(style.handle(), valueArg)
+	valueFin()
+	return value
+}
+
+// DisplaySafeAreaPadding - If you cannot see the
+// edges of your screen (e.g. on a TV) increase the safe area padding.
+// Apply to popups/tooltips as well regular windows.
+// NB: Prefer configuring your TV sets correctly!
+func (style Style) DisplaySafeAreaPadding() Vec2 {
+	var value Vec2
+	valueArg, valueFin := value.wrapped()
+	C.iggStyleGetDisplaySafeAreaPadding(style.handle(), valueArg)
 	valueFin()
 	return value
 }
